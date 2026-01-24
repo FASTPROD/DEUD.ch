@@ -1257,3 +1257,318 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
     color: var(--slate-600);
 }
+
+/* ========================================
+   TOAST NOTIFICATIONS
+   ======================================== */
+#toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+}
+
+@media (max-width: 576px) {
+    #toast-container {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--slate-900);
+    color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+    max-width: 360px;
+}
+
+@media (max-width: 576px) {
+    .toast {
+        max-width: 100%;
+        transform: translateY(100%);
+    }
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+@media (max-width: 576px) {
+    .toast.show {
+        transform: translateY(0);
+    }
+}
+
+.toast-success {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.toast-error {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.toast-info {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-message {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* ========================================
+   SCROLL ANIMATIONS
+   ======================================== */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animations for children */
+.animate-on-scroll.animate-in .team-card,
+.animate-on-scroll.animate-in .expertise-card,
+.animate-on-scroll.animate-in .process-step {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.animate-on-scroll.animate-in .team-card:nth-child(1),
+.animate-on-scroll.animate-in .expertise-card:nth-child(1),
+.animate-on-scroll.animate-in .process-step:nth-child(1) { animation-delay: 0.1s; }
+
+.animate-on-scroll.animate-in .team-card:nth-child(2),
+.animate-on-scroll.animate-in .expertise-card:nth-child(2),
+.animate-on-scroll.animate-in .process-step:nth-child(2) { animation-delay: 0.2s; }
+
+.animate-on-scroll.animate-in .team-card:nth-child(3),
+.animate-on-scroll.animate-in .expertise-card:nth-child(3),
+.animate-on-scroll.animate-in .process-step:nth-child(3) { animation-delay: 0.3s; }
+
+.animate-on-scroll.animate-in .expertise-card:nth-child(4),
+.animate-on-scroll.animate-in .process-step:nth-child(4) { animation-delay: 0.4s; }
+
+.animate-on-scroll.animate-in .expertise-card:nth-child(5) { animation-delay: 0.5s; }
+.animate-on-scroll.animate-in .expertise-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    background: var(--primary-500);
+    color: white;
+    border-radius: var(--radius);
+    z-index: 10001;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* Remove focus outlines for mouse users */
+body.using-mouse *:focus {
+    outline: none;
+}
+
+/* Better focus styles for keyboard users */
+*:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .page-loader {
+        transition: none;
+    }
+    
+    .floating-card {
+        animation: none;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+    .page-loader,
+    .navbar,
+    .qr-section,
+    .hero-visual,
+    .cta-section,
+    #toast-container {
+        display: none !important;
+    }
+    
+    .hero-section {
+        background: white !important;
+        color: black !important;
+        min-height: auto !important;
+        padding: 2rem 0 !important;
+    }
+    
+    .hero-title,
+    .section-title,
+    h1, h2, h3, h4, h5, h6 {
+        color: black !important;
+    }
+    
+    .text-gradient {
+        background: none !important;
+        -webkit-text-fill-color: var(--primary-600) !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .team-card,
+    .expertise-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.gradient-border {
+    position: relative;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary-500), var(--accent));
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+}
+
+/* Glass effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Shimmer loading effect */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--slate-200) 25%,
+        var(--slate-100) 50%,
+        var(--slate-200) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius);
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Button micro-interaction */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.btn:active::after {
+    width: 200%;
+    height: 200%;
+}
