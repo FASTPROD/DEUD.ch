@@ -774,8 +774,17 @@ h1, h2, h3, h4, h5, h6 {
    FOOTER
    ======================================== */
 .footer-section {
-    background: var(--slate-900);
-    color: white;
+    background: linear-gradient(180deg, var(--slate-800) 0%, var(--slate-900) 100%);
+    color: var(--slate-100);
+    border-top: 1px solid var(--slate-700);
+}
+
+.footer-section p.text-muted {
+    color: var(--slate-300) !important;
+}
+
+.footer-section .small {
+    color: var(--slate-300);
 }
 
 .brand-text-footer {
