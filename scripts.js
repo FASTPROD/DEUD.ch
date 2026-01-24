@@ -2,6 +2,28 @@
 // DueD™ - Interactive Scripts
 // ========================================
 
+// Page Loader - hide after content loads
+document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+        // Wait for all assets then fade out
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        });
+        // Fallback: hide after 2 seconds max
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 2000);
+    }
+    
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+
 // Copy link functionality
 function copyLink() {
     const url = window.location.href;
