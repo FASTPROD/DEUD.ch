@@ -9,7 +9,7 @@
 // CONFIGURATION
 // ========================================
 const CONFIG = {
-    loaderTimeout: 2000,
+    loaderTimeout: 3000,
     toastDuration: 3000,
     scrollOffset: 80,
     debounceDelay: 100
