@@ -1016,9 +1016,18 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
+/* 3-button simplified layout */
+.profile-actions-grid.profile-actions-3 {
+    max-width: 450px;
+}
+
 @media (min-width: 640px) {
     .profile-actions-grid {
         grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .profile-actions-grid.profile-actions-3 {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -1027,16 +1036,20 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem;
+    padding: 1.25rem 1rem;
     background: white;
     border: 1px solid var(--slate-200);
     border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--slate-700);
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.875rem;
+    font-weight: 600;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-md);
+}
+
+.profile-actions-3 .action-btn {
+    padding: 1.5rem 1.25rem;
 }
 
 .action-btn:hover {
@@ -1047,8 +1060,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .action-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     color: var(--primary-500);
 }
 
@@ -1205,37 +1218,37 @@ h1, h2, h3, h4, h5, h6 {
 
 .cv-tabs {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    background: var(--slate-100);
+    border-radius: var(--radius-lg);
+    padding: 0.5rem;
 }
 
 .cv-tab {
     flex: 1;
-    min-width: 120px;
     padding: 0.75rem 1rem;
-    background: var(--slate-100);
-    border: 1px solid var(--slate-200);
-    border-radius: var(--radius-lg);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--slate-600);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     text-align: center;
     white-space: nowrap;
 }
 
 .cv-tab:hover {
-    background: var(--slate-50);
-    border-color: var(--primary-300);
+    color: var(--primary-600);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .cv-tab.active {
-    background: linear-gradient(135deg, var(--primary-500), var(--accent));
-    color: white;
-    border-color: transparent;
+    background: white;
+    color: var(--primary-600);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .cv-content {
