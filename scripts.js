@@ -109,26 +109,34 @@ const Toast = {
 // ========================================
 const PageLoader = {
     element: null,
+    minDisplayTime: 2000,  // Minimum time to show loader (2 seconds)
+    startTime: Date.now(),
     
     init() {
         this.element = document.getElementById('page-loader');
         if (!this.element) return;
         
-        // Hide on window load
+        this.startTime = Date.now();
+        
+        // Hide on window load, but ensure minimum display time
         window.addEventListener('load', () => {
-            setTimeout(() => this.hide(), 300);
+            const elapsed = Date.now() - this.startTime;
+            const remaining = Math.max(0, this.minDisplayTime - elapsed);
+            setTimeout(() => this.hide(), remaining);
         });
         
-        // Fallback timeout
+        // Maximum timeout (fallback)
         setTimeout(() => this.hide(), CONFIG.loaderTimeout);
     },
     
     hide() {
-        if (this.element) {
+        if (this.element && !this.element.classList.contains('hidden')) {
             this.element.classList.add('hidden');
             // Remove from DOM after transition
             setTimeout(() => {
-                this.element.style.display = 'none';
+                if (this.element) {
+                    this.element.style.display = 'none';
+                }
             }, 500);
         }
     }
